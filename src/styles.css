@@ -1,34 +1,49 @@
-body {
+html,
+body,
+#root {
+  padding: 0;
   margin: 0;
+  height: 100%;
 }
 
 .App {
-  box-sizing: border-box;
+  display: flex;
+  height: 100%;
   font-family: sans-serif;
   text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+.Courses {
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  text-align: center;
+  margin: 0;
   padding: 0;
 }
 
 .CourseListHeader {
-  padding: 5px;
+  flex-basis: auto;
+  flex-shrink: 0;
   box-sizing: border-box;
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   text-align: center;
-  flex-wrap: wrap;
   align-items: center;
-  overflow: hidden;
   background-color: rgb(224, 227, 228);
-  border: 1px solid grey;
   margin: 0;
   width: 100%;
 }
 
 .CourseListHeader h3 {
+  padding: 5px;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -36,27 +51,55 @@ body {
 }
 
 .searchField {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-style: none;
   box-sizing: border-box;
-  display: flex;
-  max-width: 100%;
-  border-radius: 3px;
   padding: 5px;
+  margin: 0;
+  line-height: 22px;
 }
 
 .searchField:hover {
-  box-shadow: 0px 0px 2px black;
-  -webkit-box-shadow: 0px 0px 2px black;
+  border-color: rgb(52, 160, 248);
+  box-shadow: 0px 0px 3px rgb(52, 160, 248);
+}
+
+.searchField:focus {
+  border-color: rgb(52, 160, 248);
+  box-shadow: inset 0px 0px 3px rgb(52, 160, 248);
+}
+
+.searchField:hover:focus {
+  box-shadow: 0px 0px 3px rgb(52, 160, 248), inset 0px 0px 3px rgb(52, 160, 248);
 }
 
 .CourseList {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-basis: auto;
+  flex-shrink: 1;
   flex-direction: column;
-  width: 50%;
-  text-align: center;
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow: auto;
+}
+
+.Course {
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column;
+  box-sizing: border-box;
+  justify-content: center;
+  background-color: rgb(239, 242, 243);
+  list-style-type: none;
+  padding: 5px 5px 0px 5px;
+  text-align: center;
+}
+
+.Course:hover {
+  background-color: rgb(213, 220, 223);
+  cursor: pointer;
 }
 
 .courseCode {
@@ -74,33 +117,17 @@ body {
   text-overflow: ellipsis;
 }
 
-.Course {
-  box-sizing: border-box;
-  justify-content: center;
-  background-color: rgb(239, 242, 243);
-  list-style-type: none;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  border-bottom: 1px solid grey;
-  width: 100%;
-  padding: 5px;
-  text-align: center;
-}
-
-.Course:hover {
-  background-color: rgb(213, 220, 223);
-  cursor: pointer;
-}
-
-.loader {
-  font-size: 3rem;
-  text-align: center;
-  margin: 40px 0;
+.border {
+  align-self: center;
+  display: flex;
+  margin: 5px 0px 0px 0px;
+  width: 95%;
+  border-bottom: 1px solid rgb(196, 190, 190);
 }
 
 .Schedule {
+  max-height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 50%;
@@ -110,36 +137,69 @@ body {
 }
 
 .ScheduleHeader {
-  padding: 5px;
+  flex-basis: auto;
+  flex-shrink: 0;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  text-align: center;
   flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
   align-items: center;
-  overflow: hidden;
   background-color: rgb(224, 227, 228);
-  border: 1px solid grey;
   margin: 0;
   width: 100%;
 }
 
 .ScheduleHeader h3 {
+  padding: 5px;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
 }
 
+.scheduleCourseName {
+  float: right;
+}
+
+.ScheduleEventList {
+  display: flex;
+  flex-basis: auto;
+  flex-shrink: 1;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
 .ScheduleEvent {
+  flex-wrap: wrap;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column;
   box-sizing: border-box;
-  justify-content: center;
   background-color: rgb(239, 242, 243);
   list-style-type: none;
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
-  border-bottom: 1px solid grey;
-  width: 100%;
-  padding: 5px;
+  padding: 5px 5px 0px 5px;
   text-align: center;
+}
+
+.ScheduleEvent:hover {
+  background-color: rgb(213, 220, 223);
+  cursor: pointer;
+}
+
+.ScheduleEvent p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  padding: 0;
+}
+
+.Loader {
+  font-size: 3rem;
+  text-align: center;
+  margin: 40px 0;
 }

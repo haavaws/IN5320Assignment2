@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CourseList from "./CourseList";
-import CourseListHeader from "./CourseListHeader";
+import Courses from "./Courses";
 import Schedule from "./Schedule";
+import Loader from "./Loader";
 
 import "./styles.css";
 
@@ -14,7 +14,44 @@ class App extends React.Component {
     semester: "h",
     searchValue: "",
     schedule: [],
-    schedulePending: true
+    schedulePending: true,
+    scheduleCourseCode: ""
+  };
+
+  sortSchedules = schedule => {
+    var scheduleGroups = [];
+    var i;
+    var j;
+
+    /* Categories the schedule events */
+    for (i = 0; i < schedule.length; i++) {
+      for (j = 0; j < scheduleGroups.length; j++) {
+        if (schedule[i].activityTitle === scheduleGroups[j].activityTitle) {
+          scheduleGroups[j].events.push(schedule[i]);
+          break;
+        }
+      }
+      if (j === scheduleGroups.length) {
+        scheduleGroups.push({});
+        scheduleGroups[j].activityTitle = schedule[i].activityTitle;
+        scheduleGroups[j].events = [];
+        scheduleGroups[j].events.push(schedule[i]);
+      }
+    }
+
+    /* Sort the categories according to their names */
+    for (i = 0; i < scheduleGroups.length; i++) {
+      for (j = 0; j < scheduleGroups.length - 1; j++) {
+        if (
+          scheduleGroups[j].activityTitle > scheduleGroups[j + 1].activityTitle
+        ) {
+          var tmp = scheduleGroups[j];
+          scheduleGroups[j] = scheduleGroups[j + 1];
+          scheduleGroups[j + 1] = tmp;
+        }
+      }
+    }
+    return scheduleGroups;
   };
 
   inputChangeHandler = event => {
@@ -35,8 +72,12 @@ class App extends React.Component {
           "/schedule"
       );
       const schedule = (await response.json()).events;
-      this.setState({ schedule: schedule, schedulePending: false });
-      console.log(schedule);
+      const scheduleGroups = await this.sortSchedules(schedule);
+      this.setState({
+        schedule: scheduleGroups,
+        schedulePending: false,
+        scheduleCourseCode: courseCode
+      });
     } catch (e) {
       console.log("Failed to fetch course schedule!");
       console.log(e.message);
@@ -75,19 +116,22 @@ class App extends React.Component {
 
   render() {
     if (this.state.pending) {
-      return <div className="loader">Loading...</div>;
+      return <Loader />;
     }
     return (
       <section className="App">
-        <CourseList
+        <Courses
           changeHandler={this.inputChangeHandler}
           clickHandler={this.courseClickHandler}
           courses={this.state.courses}
           searchValue={this.state.searchValue}
         />
-        {!this.state.schedulePending && (
-          <Schedule schedule={this.state.schedule} />
-        )}
+        {(!this.state.schedulePending && (
+          <Schedule
+            courseCode={this.state.scheduleCourseCode}
+            schedule={this.state.schedule}
+          />
+        )) || <Loader />}
       </section>
     );
   }

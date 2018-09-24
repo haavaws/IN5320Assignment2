@@ -5,6 +5,7 @@ function Course(props) {
     <li className="Course" onClick={props.clickHandler}>
       <p className="courseCode">{props.code}</p>
       <p className="courseName">{props.name}</p>
+      <div className="border" />
     </li>
   );
 }
