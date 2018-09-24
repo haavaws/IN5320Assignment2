@@ -1,10 +1,14 @@
 import React from "react";
 import Course from "./Course";
+import CourseListHeader from "./CourseListHeader";
 
 function CourseList(props) {
   return (
     <section className="CourseList">
-      {console.log(props.courses)}
+      <CourseListHeader
+        changeHandler={props.inputChangeHandler}
+        searchValue={props.searchValue}
+      />
       {props.courses.map((course, index) => {
         if (
           course.code.toUpperCase().startsWith(props.searchValue.toUpperCase())

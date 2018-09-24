@@ -44,19 +44,14 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    this.setState({ pending: true });
-    console.log(this.state.pending);
+    await this.setState({ pending: true });
     try {
       if (localStorage.age) {
-        console.log(this.state.pending);
         if (Date.now() - Number(localStorage.age) < 60 * 60 * 1000) {
           this.setState({
             courses: JSON.parse(localStorage.courses),
             pending: false
           });
-        } else {
-          console.log("BAAAD");
-          console.log(this.state.pending);
         }
       }
       if (this.state.pending) {
@@ -84,18 +79,15 @@ class App extends React.Component {
     }
     return (
       <section className="App">
-        {console.log("courses")}
-        <section className="CourseSection">
-          <CourseListHeader
-            changeHandler={this.inputChangeHandler}
-            searchValue={this.state.searchValue}
-          />
-          <CourseList
-            clickHandler={this.courseClickHandler}
-            courses={this.state.courses}
-            searchValue={this.state.searchValue}
-          />
-        </section>
+        <CourseList
+          changeHandler={this.inputChangeHandler}
+          clickHandler={this.courseClickHandler}
+          courses={this.state.courses}
+          searchValue={this.state.searchValue}
+        />
+        {!this.state.schedulePending && (
+          <Schedule schedule={this.state.schedule} />
+        )}
       </section>
     );
   }
