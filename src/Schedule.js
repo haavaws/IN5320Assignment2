@@ -1,12 +1,16 @@
 import React from "react";
 import ScheduleHeader from "./ScheduleHeader";
-import ScheduleEventList from "./ScheduleEventList";
+import ScheduleGroupList from "./ScheduleGroupList";
 
 function Schedule(props) {
   return (
     <section className="Schedule">
       <ScheduleHeader courseCode={props.courseCode} />
-      <ScheduleEventList schedule={props.schedule} />
+      <ScheduleGroupList
+        schedule={props.schedule}
+        groupTitle={props.groupTitle}
+        clickHandler={props.clickHandler}
+      />
     </section>
   );
 }

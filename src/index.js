@@ -15,7 +15,8 @@ class App extends React.Component {
     searchValue: "",
     schedule: [],
     schedulePending: true,
-    scheduleCourseCode: ""
+    scheduleCourseCode: "",
+    groupTitle: ""
   };
 
   sortSchedules = schedule => {
@@ -57,6 +58,12 @@ class App extends React.Component {
   inputChangeHandler = event => {
     const newVal = event.target.value;
     this.setState({ searchValue: newVal });
+  };
+
+  scheduleGroupClickHandler = async event => {
+    const groupTitle =
+      event.currentTarget.childNodes[0].childNodes[0].innerHTML;
+    this.setState({ groupTitle: groupTitle });
   };
 
   courseClickHandler = async event => {
@@ -126,12 +133,14 @@ class App extends React.Component {
           courses={this.state.courses}
           searchValue={this.state.searchValue}
         />
-        {(!this.state.schedulePending && (
+        {!this.state.schedulePending && (
           <Schedule
+            clickHandler={this.scheduleGroupClickHandler}
             courseCode={this.state.scheduleCourseCode}
             schedule={this.state.schedule}
+            groupTitle={this.state.groupTitle}
           />
-        )) || <Loader />}
+        ) /*|| <Loader />*/}
       </section>
     );
   }

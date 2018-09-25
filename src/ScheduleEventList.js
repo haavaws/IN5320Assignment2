@@ -4,14 +4,8 @@ import ScheduleEvent from "./ScheduleEvent";
 function ScheduleEventList(props) {
   return (
     <section className="ScheduleEventList">
-      {/*console.log(props.schedule)*/}
-      {props.schedule.map((category, index) => {
-        return (
-          <ScheduleEvent
-            key={category.activityTitle}
-            activityTitle={category.activityTitle}
-          />
-        );
+      {props.groupSchedule.map((event, index) => {
+        return <ScheduleEvent key={index} event={event} />;
       })}
     </section>
   );

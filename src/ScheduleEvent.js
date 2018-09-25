@@ -3,7 +3,7 @@ import React from "react";
 function ScheduleEvent(props) {
   return (
     <li className="ScheduleEvent">
-      <p>{props.activityTitle}</p>
+      <p>{props.event.title}</p>
       <div className="border" />
     </li>
   );
