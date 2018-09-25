@@ -5,7 +5,7 @@ function ScheduleGroup(props) {
   return (
     <section onClick={props.clickHandler} grouptitle={props.activityTitle}>
       <li className="ScheduleGroup">
-        <p>{props.activityTitle}</p>
+        <p className="ScheduleGroupTitle">{props.activityTitle}</p>
         <div className="border" />
         {props.groupTitle === props.activityTitle && (
           <ScheduleEventList groupSchedule={props.groupSchedule} />

@@ -203,6 +203,10 @@ body,
   cursor: pointer;
 }
 
+.ScheduleGroupTitle {
+  font-weight: bold;
+}
+
 .ScheduleGroup p {
   white-space: nowrap;
   overflow: hidden;
@@ -253,6 +257,10 @@ body,
   text-overflow: ellipsis;
   margin: 0;
   padding: 0;
+}
+
+.EventTitle {
+  font-weight: bold;
 }
 
 .Loader {
