@@ -19,6 +19,19 @@ class App extends React.Component {
     groupTitle: ""
   };
 
+  clearGroupSchedule = () => {
+    this.setState({ groupTitle: "" });
+  };
+
+  clearSchedule = () => {
+    this.setState({
+      schedule: [],
+      schedulePending: true,
+      scheduleCourseCode: "",
+      groupTitle: ""
+    });
+  };
+
   sortSchedules = schedule => {
     var scheduleGroups = [];
     var i;
@@ -128,14 +141,17 @@ class App extends React.Component {
     return (
       <section className="App">
         <Courses
+          activeCourse={this.state.scheduleCourseCode}
+          activeCourseClickHandler={this.clearSchedule}
           changeHandler={this.inputChangeHandler}
-          clickHandler={this.courseClickHandler}
+          courseClickHandler={this.courseClickHandler}
           courses={this.state.courses}
           searchValue={this.state.searchValue}
         />
         {!this.state.schedulePending && (
           <Schedule
-            clickHandler={this.scheduleGroupClickHandler}
+            activeGroupClickHandler={this.clearGroupSchedule}
+            scheduleGroupClickHandler={this.scheduleGroupClickHandler}
             courseCode={this.state.scheduleCourseCode}
             schedule={this.state.schedule}
             groupTitle={this.state.groupTitle}

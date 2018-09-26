@@ -10,7 +10,9 @@ function CourseList(props) {
         )
           return (
             <Course
-              clickHandler={props.clickHandler}
+              activeCourse={props.activeCourse}
+              activeCourseClickHandler={props.activeCourseClickHandler}
+              courseClickHandler={props.courseClickHandler}
               key={index}
               name={course.name}
               code={course.code}

@@ -1,5 +1,4 @@
 import React from "react";
-import Course from "./Course";
 import CourseList from "./CourseList";
 import CourseListHeader from "./CourseListHeader";
 
@@ -11,8 +10,10 @@ function Courses(props) {
         searchValue={props.searchValue}
       />
       <CourseList
+        activeCourse={props.activeCourse}
+        activeCourseClickHandler={props.activeCourseClickHandler}
         courses={props.courses}
-        clickHandler={props.clickHandler}
+        courseClickHandler={props.courseClickHandler}
         searchValue={props.searchValue}
       />
     </section>

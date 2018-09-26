@@ -7,9 +7,10 @@ function Schedule(props) {
     <section className="Schedule">
       <ScheduleHeader courseCode={props.courseCode} />
       <ScheduleGroupList
+        activeGroupClickHandler={props.activeGroupClickHandler}
         schedule={props.schedule}
         groupTitle={props.groupTitle}
-        clickHandler={props.clickHandler}
+        scheduleGroupClickHandler={props.scheduleGroupClickHandler}
       />
     </section>
   );
