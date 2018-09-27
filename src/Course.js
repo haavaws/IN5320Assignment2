@@ -13,7 +13,6 @@ function Course(props) {
     >
       <p className="courseCode">{props.code}</p>
       <p className="courseName">{props.name}</p>
-      <div className="border" />
     </li>
   );
 }

@@ -100,14 +100,16 @@ body,
   flex-flow: column;
   box-sizing: border-box;
   justify-content: center;
-  background-color: rgb(239, 242, 243);
+  background-color: rgb(213, 219, 221);
   list-style-type: none;
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 5px 5px;
+  margin: 2px 4px 2px 4px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .Course:hover {
-  background-color: rgb(213, 220, 223);
+  background-color: rgb(229, 235, 238);
   cursor: pointer;
 }
 
@@ -192,14 +194,16 @@ body,
   flex: 0 0 auto;
   flex-flow: column;
   box-sizing: border-box;
-  background-color: rgb(239, 242, 243);
+  background-color: rgb(213, 219, 221);
   list-style-type: none;
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 5px 5px;
+  margin: 2px 4px 2px 4px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .ScheduleGroup:hover {
-  background-color: rgb(213, 220, 223);
+  background-color: rgb(229, 235, 238);
   cursor: pointer;
 }
 
@@ -226,7 +230,7 @@ body,
   flex-basis: auto;
   flex-shrink: 1;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -240,10 +244,12 @@ body,
   flex: 0 0 auto;
   flex-flow: column;
   box-sizing: border-box;
-  background-color: rgb(225, 229, 230);
+  background-color: rgb(189, 194, 196);
   list-style-type: none;
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 5px 5px;
+  margin: 2px 4px 2px 4px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .ScheduleEvent:hover {
@@ -261,6 +267,44 @@ body,
 
 .EventTitle {
   font-weight: bold;
+}
+
+.eventDateTime {
+  max-width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.eventDateTime span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 0px 4px 0px 4px;
+}
+
+.eventTime {
+  max-width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.eventTime p {
+  padding: 0;
+}
+
+.eventLocation {
+  max-width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.eventLocation p {
+  padding: 0px 4px 0px 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .Loader {

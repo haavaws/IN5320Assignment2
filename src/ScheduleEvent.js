@@ -5,16 +5,16 @@ function getDate(dateObj) {
   var months = [
     "Jan",
     "Feb",
-    "Marh",
+    "Mar",
     "Apr",
     "May",
     "Jun",
     "Jul",
-    "Augt",
+    "Aug",
     "Sep",
     "Oct",
     "Nov",
-    "Dece"
+    "Dec"
   ];
   const date =
     days[dateObj.getDay()] +
@@ -38,14 +38,19 @@ function ScheduleEvent(props) {
   return (
     <li className="ScheduleEvent">
       <p className="EventTitle">{props.event.title}</p>
-      <p>
-        {getDate(new Date(props.event.dtStart)) +
-          " " +
-          getTime(new Date(props.event.dtStart)) +
-          "-" +
-          getTime(new Date(props.event.dtEnd))}
-      </p>
-      <div className="border" />
+      <span className="eventDateTime">
+        <span>
+          <p>{getDate(new Date(props.event.dtStart))}</p>
+        </span>
+        <span className="eventTime">
+          <p>{getTime(new Date(props.event.dtStart))}</p>-
+          <p>{getTime(new Date(props.event.dtEnd))}</p>
+        </span>
+      </span>
+      <span className="eventLocation">
+        <p>{props.event.rooms[0].buildingName}</p>
+        <p>{props.event.rooms[0].roomName}</p>
+      </span>
     </li>
   );
 }

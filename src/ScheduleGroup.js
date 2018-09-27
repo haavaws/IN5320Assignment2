@@ -12,7 +12,6 @@ function ScheduleGroup(props) {
     >
       <li className="ScheduleGroup">
         <p className="ScheduleGroupTitle">{props.activityTitle}</p>
-        <div className="border" />
         {props.groupTitle === props.activityTitle && (
           <ScheduleEventList groupSchedule={props.groupSchedule} />
         )}
