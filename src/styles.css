@@ -9,6 +9,47 @@ body,
 }
 
 .App {
+  width: 100%;
+  display: flex;
+  height: 100%;
+  font-family: sans-serif;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.GoogleCalendar {
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-direction: row;
+  width: 100%;
+}
+
+.GoogleCalendar button {
+  font-weight: bold;
+  color: white;
+  background-color: rgb(0, 81, 255);
+  border: none;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 10px;
+}
+
+.GoogleCalendar button:hover {
+  cursor: pointer;
+  background-color: rgb(53, 116, 250);
+}
+
+.buttonBorder {
+  width: 0;
+  height: 100%;
+  border-left: 1px solid white;
+}
+
+.content {
+  width: 100%;
   box-sizing: border-box;
   flex-shrink: 1;
   flex-basis: 100%;
@@ -26,11 +67,11 @@ body,
 .Courses {
   max-width: 100%;
   max-height: 100%;
-  min-width: 33%;
+  min-width: 50%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  flex-basis: 33%;
+  flex-basis: auto;
   flex-grow: 1;
   text-align: center;
   margin: 0;
@@ -59,6 +100,26 @@ body,
   margin: 0;
 }
 
+#yearDDL {
+  flex: 1 0 fit-content;
+  min-width: 0;
+  box-sizing: border-box;
+  border-style: none;
+  margin-right: 2px;
+  padding: 0;
+  height: 32px;
+}
+
+#semesterDDL {
+  flex: 0 0 fit-content;
+  min-width: 0;
+  box-sizing: border-box;
+  border-style: none;
+  padding: 0;
+  margin-right: 2px;
+  height: 32px;
+}
+
 .searchField {
   flex: 1 1 auto;
   min-width: 0;
@@ -69,17 +130,21 @@ body,
   line-height: 22px;
 }
 
-.searchField:hover {
-  border-color: rgb(52, 160, 248);
-  box-shadow: 0px 0px 3px rgb(52, 160, 248);
+@media (hover: hover) {
+  .searchField:hover {
+    border-color: rgb(52, 160, 248);
+    box-shadow: 0px 0px 3px rgb(52, 160, 248);
+  }
 }
 
 .searchField:focus {
+  border-style: none;
   border-color: rgb(52, 160, 248);
   box-shadow: inset 0px 0px 3px rgb(52, 160, 248);
 }
 
 .searchField:hover:focus {
+  border-style: none;
   box-shadow: 0px 0px 3px rgb(52, 160, 248), inset 0px 0px 3px rgb(52, 160, 248);
 }
 
@@ -100,17 +165,19 @@ body,
   flex-flow: column;
   box-sizing: border-box;
   justify-content: center;
-  background-color: rgb(213, 219, 221);
+  background-color: rgb(232, 238, 240);
   list-style-type: none;
   padding: 5px 5px 5px 5px;
   margin: 2px 4px 2px 4px;
   text-align: center;
   border-radius: 5px;
 }
-
-.Course:hover {
-  background-color: rgb(229, 235, 238);
-  cursor: pointer;
+@media (hover: hover) {
+  .Course:hover {
+    color: white;
+    background-color: rgb(94, 153, 243);
+    cursor: pointer;
+  }
 }
 
 .courseCode {
@@ -128,6 +195,16 @@ body,
   text-overflow: ellipsis;
 }
 
+.activeCourse {
+  color: white;
+  background-color: rgb(22, 104, 228);
+}
+@media (hover: hover) {
+  .activeCourse:hover {
+    background-color: rgb(29, 118, 252);
+  }
+}
+
 .border {
   align-self: center;
   display: flex;
@@ -137,13 +214,13 @@ body,
 }
 
 .Schedule {
-  min-width: 33%;
+  min-width: 50%;
   max-width: 100%;
   max-height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  flex-basis: 33%;
+  flex-basis: auto;
   flex-grow: 1;
   text-align: center;
   margin: 0;
@@ -194,17 +271,39 @@ body,
   flex: 0 0 auto;
   flex-flow: column;
   box-sizing: border-box;
-  background-color: rgb(213, 219, 221);
+  background-color: rgb(232, 238, 240);
   list-style-type: none;
   padding: 5px 5px 5px 5px;
   margin: 2px 4px 2px 4px;
   text-align: center;
   border-radius: 5px;
 }
+@media (hover: hover) {
+  .ScheduleGroup:hover {
+    color: white;
+    background-color: rgb(94, 153, 243);
+    cursor: pointer;
+  }
+}
 
-.ScheduleGroup:hover {
-  background-color: rgb(229, 235, 238);
-  cursor: pointer;
+.someEventsSelected {
+  color: white;
+  background-color: rgb(118, 166, 230);
+}
+@media (hover: hover) {
+  .someEventsSelected:hover {
+    background-color: rgb(153, 192, 250);
+  }
+}
+
+.allEventsSelected {
+  color: white;
+  background-color: rgb(63, 136, 231);
+}
+@media (hover: hover) {
+  .allEventsSelected:hover {
+    background-color: rgb(87, 154, 255);
+  }
 }
 
 .ScheduleGroupTitle {
@@ -233,7 +332,7 @@ body,
   align-items: center;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 10px 0px 0px 0px;
   overflow: auto;
 }
 
@@ -244,17 +343,30 @@ body,
   flex: 0 0 auto;
   flex-flow: column;
   box-sizing: border-box;
-  background-color: rgb(189, 194, 196);
+  color: black;
+  background-color: rgb(219, 222, 224);
   list-style-type: none;
   padding: 5px 5px 5px 5px;
   margin: 2px 4px 2px 4px;
   text-align: center;
   border-radius: 5px;
 }
+@media (hover: hover) {
+  .ScheduleEvent:hover {
+    color: white;
+    background-color: rgb(59, 134, 247);
+    cursor: pointer;
+  }
+}
 
-.ScheduleEvent:hover {
-  background-color: rgb(213, 220, 223);
-  cursor: pointer;
+.selectedEvent {
+  color: white;
+  background-color: rgb(22, 104, 228);
+}
+@media (hover: hover) {
+  .selectedEvent:hover {
+    background-color: rgb(29, 118, 252);
+  }
 }
 
 .ScheduleEvent p {
@@ -311,4 +423,8 @@ body,
   font-size: 3rem;
   text-align: center;
   margin: 40px 0;
+}
+
+.data {
+  display: none;
 }

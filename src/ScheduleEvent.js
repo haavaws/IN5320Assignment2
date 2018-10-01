@@ -36,7 +36,17 @@ function getTime(dateObj) {
 
 function ScheduleEvent(props) {
   return (
-    <li className="ScheduleEvent">
+    <li
+      className={
+        (props.selected && "ScheduleEvent selectedEvent") || "ScheduleEvent"
+      }
+      onClick={props.scheduleEventClickHandler}
+    >
+      <p className="data">{props.event.title}</p>
+      <p className="data">{props.event.dtStart}</p>
+      <p className="data">{props.event.dtEnd}</p>
+      <p className="data">{props.event.rooms[0].buildingName}</p>
+      <p className="data">{props.event.rooms[0].roomName}</p>
       <p className="EventTitle">{props.event.title}</p>
       <span className="eventDateTime">
         <span>

@@ -9,10 +9,12 @@ function ScheduleGroupList(props) {
           <ScheduleGroup
             activeGroupClickHandler={props.activeGroupClickHandler}
             scheduleGroupClickHandler={props.scheduleGroupClickHandler}
+            scheduleEventClickHandler={props.scheduleEventClickHandler}
             key={category.activityTitle}
-            activityTitle={category.activityTitle}
-            groupTitle={props.groupTitle}
+            groupTitle={category.activityTitle}
+            selectedGroupTitle={props.groupTitle}
             groupSchedule={category.events}
+            selectedEvents={props.selectedEvents}
           />
         );
       })}

@@ -8,15 +8,91 @@ class Schedule extends React.Component {
     courseCode: "",
     schedule: [],
     groupTitle: "",
+    selectedEvents: [],
     schedulePending: false
   };
+
   componentWillMount(props) {
     this.getSchedule();
   }
 
-  scheduleGroupClickHandler = async event => {
+  scheduleEventClickHandler = event => {
+    event.stopPropagation();
+
+    var i;
+    var j;
+
+    var newSelectedGroupEvents;
+    var newSelectedEvents = Array.from(this.state.selectedEvents);
+
     const groupTitle =
-      event.currentTarget.childNodes[0].childNodes[0].innerHTML;
+      event.currentTarget.parentNode.parentNode.childNodes[0].innerHTML;
+
+    const eventTitle = event.currentTarget.childNodes[0].innerHTML;
+    const dtStart = event.currentTarget.childNodes[1].innerHTML;
+    const dtEnd = event.currentTarget.childNodes[2].innerHTML;
+    const buildingName = event.currentTarget.childNodes[3].innerHTML;
+    const roomName = event.currentTarget.childNodes[4].innerHTML;
+
+    for (i = 0; i < newSelectedEvents.length; i++) {
+      /* Check if there are any selected events from the same group */
+      if (newSelectedEvents[i].groupTitle === groupTitle) {
+        newSelectedGroupEvents = Array.from(newSelectedEvents[i].events);
+
+        for (j = 0; j < newSelectedEvents[i].events.length; j++) {
+          /* Check if the event is already selected, and deselect it if it is */
+          if (newSelectedEvents[i].events[j].dtStart === dtStart) {
+            newSelectedGroupEvents.splice(j, 1);
+            if (newSelectedGroupEvents.length === 0) {
+              newSelectedEvents.splice(i, 1);
+            } else {
+              newSelectedEvents[i] = {
+                groupTitle: groupTitle,
+                events: newSelectedGroupEvents
+              };
+            }
+            this.setState({ selectedEvents: newSelectedEvents });
+            return;
+          }
+        }
+
+        /* Add the event to the selected events if it wasn't already selected */
+        newSelectedGroupEvents.push({
+          eventTitle,
+          dtStart,
+          dtEnd,
+          buildingName,
+          roomName
+        });
+        newSelectedEvents[i] = {
+          groupTitle: newSelectedEvents[i].groupTitle,
+          events: newSelectedGroupEvents
+        };
+        this.setState({ selectedEvents: newSelectedEvents });
+        return;
+      }
+    }
+
+    /* If no events from the group had been selected previously, add an entry
+    for the group and add the event to the selected events */
+    newSelectedGroupEvents = {
+      groupTitle,
+      events: [
+        {
+          eventTitle,
+          dtStart,
+          dtEnd,
+          buildingName,
+          roomName
+        }
+      ]
+    };
+    newSelectedEvents.push(newSelectedGroupEvents);
+    this.setState({ selectedEvents: newSelectedEvents });
+  };
+
+  scheduleGroupClickHandler = async event => {
+    const groupTitle = event.currentTarget.childNodes[0].innerHTML;
     this.setState({ groupTitle: groupTitle });
   };
 
@@ -64,14 +140,20 @@ class Schedule extends React.Component {
     this.setState({
       courseCode: this.props.courseCode,
       schedule: [],
-      schedulePending: true
+      schedulePending: true,
+      selectedEvents: [],
+      groupTitle: ""
     });
     try {
+      var year = this.props.year;
+      while (year >= 100) {
+        year -= 100;
+      }
       const response = await fetch(
         "https://data.uio.no/studies/v1/course/" +
           this.props.courseCode +
           "/semester/" +
-          this.props.year +
+          year +
           this.props.semester +
           "/schedule"
       );
@@ -89,6 +171,7 @@ class Schedule extends React.Component {
 
   render() {
     if (!(this.state.courseCode === this.props.courseCode)) this.getSchedule();
+
     return (
       <section className="Schedule">
         <ScheduleHeader courseCode={this.props.courseCode} />
@@ -97,7 +180,9 @@ class Schedule extends React.Component {
             activeGroupClickHandler={this.clearGroupSchedule}
             schedule={this.state.schedule}
             groupTitle={this.state.groupTitle}
+            selectedEvents={this.state.selectedEvents}
             scheduleGroupClickHandler={this.scheduleGroupClickHandler}
+            scheduleEventClickHandler={this.scheduleEventClickHandler}
           />
         )) || <Loader />}
       </section>

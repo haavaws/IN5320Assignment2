@@ -1,23 +1,42 @@
 import React from "react";
 import ScheduleEventList from "./ScheduleEventList";
 
-function ScheduleGroup(props) {
-  return (
-    <section
-      onClick={
-        (props.groupTitle === props.activityTitle &&
-          props.activeGroupClickHandler) ||
-        props.scheduleGroupClickHandler
+class ScheduleGroup extends React.Component {
+  render() {
+    var i;
+    var selectedGroupEvents = [];
+    for (i = 0; i < this.props.selectedEvents.length; i++) {
+      if (this.props.selectedEvents[i].groupTitle === this.props.groupTitle) {
+        selectedGroupEvents = this.props.selectedEvents[i].events;
       }
-    >
-      <li className="ScheduleGroup">
-        <p className="ScheduleGroupTitle">{props.activityTitle}</p>
-        {props.groupTitle === props.activityTitle && (
-          <ScheduleEventList groupSchedule={props.groupSchedule} />
+    }
+    return (
+      <li
+        className={
+          (selectedGroupEvents.length === this.props.groupSchedule.length &&
+            "ScheduleGroup allEventsSelected") ||
+          (selectedGroupEvents.length > 0 &&
+            "ScheduleGroup someEventsSelected") ||
+          "ScheduleGroup"
+        }
+        onClick={
+          (this.props.selectedGroupTitle === this.props.groupTitle &&
+            this.props.activeGroupClickHandler) ||
+          this.props.scheduleGroupClickHandler
+        }
+      >
+        <p className="data">{this.props.groupTitle}</p>
+        <p className="ScheduleGroupTitle">{this.props.groupTitle}</p>
+        {this.props.selectedGroupTitle === this.props.groupTitle && (
+          <ScheduleEventList
+            groupSchedule={this.props.groupSchedule}
+            selectedEvents={selectedGroupEvents}
+            scheduleEventClickHandler={this.props.scheduleEventClickHandler}
+          />
         )}
       </li>
-    </section>
-  );
+    );
+  }
 }
 
 export default ScheduleGroup;
