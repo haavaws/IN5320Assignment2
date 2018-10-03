@@ -18,6 +18,88 @@ body,
   margin: 0;
 }
 
+/* Copied from Modal */
+.LoadingOverlay,
+.SubmitOverlay,
+.GapiLoadingOverlay {
+  display: flex; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.2); /* Black w/ opacity */
+}
+
+.SubmitOverlayContent,
+.gapiLoadingOverlayContent {
+  display: flex;
+  flex: 0 1 auto;
+  width: 50%;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.overlayContentAlt {
+  align-items: center;
+  background-color: red;
+  color: white;
+}
+
+.SubmitOverlayContentHeader {
+  display: flex;
+  width: 100%;
+  background-color: blue;
+  color: white;
+}
+
+.SubmitOverlayContentHeader span {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.SubmitOverlayContentHeader button {
+  display: flex;
+  border-style: none;
+  background-color: white;
+  height: fit-content;
+}
+
+@media (hover: hover) {
+  .SubmitOverlayContentHeader button:hover {
+    cursor: pointer;
+    background-color: grey;
+  }
+}
+
+.SubmitOverlayContentBody {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  background-color: white;
+  color: black;
+}
+
+.SubmitOverlayContentFooter {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  height: 30px;
+}
+
 .GoogleCalendar {
   display: flex;
   flex-basis: auto;
@@ -37,9 +119,11 @@ body,
   padding: 10px;
 }
 
-.GoogleCalendar button:hover {
-  cursor: pointer;
-  background-color: rgb(53, 116, 250);
+@media (hover: hover) {
+  .GoogleCalendar button:hover {
+    cursor: pointer;
+    background-color: rgb(53, 116, 250);
+  }
 }
 
 .buttonBorder {

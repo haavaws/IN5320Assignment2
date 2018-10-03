@@ -1,7 +1,6 @@
 import React from "react";
 import CourseList from "./CourseList";
 import CourseListHeader from "./CourseListHeader";
-import Loader from "./Loader";
 
 class Courses extends React.Component {
   state = {
@@ -14,7 +13,7 @@ class Courses extends React.Component {
     var i;
     var storedCourses = [];
     var semesterCourses = {};
-    console.log("blah");
+
     await this.setState({ pending: true });
     try {
       if (localStorage.storedCourses) {
@@ -77,6 +76,7 @@ class Courses extends React.Component {
     return (
       <section className="Courses">
         <CourseListHeader
+          onKeyPressInputField={this.props.onKeyPressInputField}
           year={this.props.year}
           semester={this.props.semester}
           inputChangeHandler={this.inputChangeHandler}
@@ -84,15 +84,14 @@ class Courses extends React.Component {
           semesterChangeHandler={this.props.semesterChangeHandler}
           searchValue={this.state.searchValue}
         />
-        {(!this.state.pending && (
-          <CourseList
-            activeCourse={this.props.activeCourse}
-            activeCourseClickHandler={this.props.activeCourseClickHandler}
-            courses={this.state.courses}
-            courseClickHandler={this.props.courseClickHandler}
-            searchValue={this.state.searchValue}
-          />
-        )) || <Loader />}
+        <CourseList
+          pending={this.state.pending}
+          activeCourse={this.props.activeCourse}
+          activeCourseClickHandler={this.props.activeCourseClickHandler}
+          courses={this.state.courses}
+          courseClickHandler={this.props.courseClickHandler}
+          searchValue={this.state.searchValue}
+        />
       </section>
     );
   }

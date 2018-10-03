@@ -22,7 +22,7 @@ class ScheduleGroup extends React.Component {
         onClick={
           (this.props.selectedGroupTitle === this.props.groupTitle &&
             this.props.activeGroupClickHandler) ||
-          this.props.scheduleGroupClickHandler
+          this.props.groupClickHandler
         }
       >
         <p className="data">{this.props.groupTitle}</p>
@@ -31,7 +31,7 @@ class ScheduleGroup extends React.Component {
           <ScheduleEventList
             groupSchedule={this.props.groupSchedule}
             selectedEvents={selectedGroupEvents}
-            scheduleEventClickHandler={this.props.scheduleEventClickHandler}
+            eventClickHandler={this.props.eventClickHandler}
           />
         )}
       </li>

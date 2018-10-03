@@ -1,15 +1,17 @@
 import React from "react";
+import LoadingOverlay from "./LoadingOverlay";
 import ScheduleGroup from "./ScheduleGroup";
 
 function ScheduleGroupList(props) {
   return (
     <section className="ScheduleGroupList">
+      {props.pending && <LoadingOverlay />}
       {props.schedule.map((category, index) => {
         return (
           <ScheduleGroup
             activeGroupClickHandler={props.activeGroupClickHandler}
-            scheduleGroupClickHandler={props.scheduleGroupClickHandler}
-            scheduleEventClickHandler={props.scheduleEventClickHandler}
+            groupClickHandler={props.groupClickHandler}
+            eventClickHandler={props.eventClickHandler}
             key={category.activityTitle}
             groupTitle={category.activityTitle}
             selectedGroupTitle={props.groupTitle}

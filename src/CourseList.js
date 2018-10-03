@@ -1,10 +1,12 @@
 import React from "react";
+import LoadingOverlay from "./LoadingOverlay";
 import Course from "./Course";
 
 class CourseList extends React.Component {
   render() {
     return (
       <section className="CourseList">
+        {/*this.props.pending && <LoadingOverlay />*/}
         {this.props.courses.map((course, index) => {
           if (
             course.code
