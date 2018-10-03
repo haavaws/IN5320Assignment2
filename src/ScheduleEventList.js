@@ -16,7 +16,7 @@ function ScheduleEventList(props) {
           <ScheduleEvent
             key={index}
             event={event}
-            scheduleEventClickHandler={props.scheduleEventClickHandler}
+            eventClickHandler={props.eventClickHandler}
             selected={selected}
           />
         );

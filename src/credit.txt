@@ -1,0 +1,9 @@
+https://loading.io/icon/vroc7x
+loading.io pacman eclipse
+
+google api:
+https://developers.google.com/calendar/quickstart/js
+https://developers.google.com/identity/protocols/OAuth2UserAgent
+
+calendar event:
+https://developers.google.com/calendar/v3/reference/events/insert#examples

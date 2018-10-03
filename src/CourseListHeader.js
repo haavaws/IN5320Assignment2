@@ -18,6 +18,7 @@ class CourseListHeader extends React.Component {
         </select>
 
         <input
+          onKeyPress={this.props.onKeyPressInputField}
           onChange={this.props.inputChangeHandler}
           className="searchField"
           value={this.props.searchValue}

@@ -40,7 +40,7 @@ function ScheduleEvent(props) {
       className={
         (props.selected && "ScheduleEvent selectedEvent") || "ScheduleEvent"
       }
-      onClick={props.scheduleEventClickHandler}
+      onClick={props.eventClickHandler}
     >
       <p className="data">{props.event.title}</p>
       <p className="data">{props.event.dtStart}</p>
