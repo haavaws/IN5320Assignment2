@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Component for rendering a single course in the course list
+ */
 function Course(props) {
   return (
     <li
@@ -7,7 +10,7 @@ function Course(props) {
         (props.activeCourse === props.code && "Course activeCourse") || "Course"
       }
       /* Set the onClick function to either getting or resetting the
-      schedule, depending on whether the course is the active course or not*/
+      schedule, depending on whether the course is the active course or not */
       onClick={
         (props.activeCourse === props.code && props.activeCourseClickHandler) ||
         props.courseClickHandler

@@ -1,16 +1,19 @@
 import React from "react";
 
+/**
+ * Component showing the header of the submission dialog
+ */
 class SubmitOverlayContentHeader extends React.Component {
   render() {
     return (
       <section className="SubmitOverlayContentHeader">
-        <section>
-          <span>
-            {" "}
-            <p>Submit selected Events for {this.props.courseCode}</p>
-            <button onClick={this.props.handleCancelSubmitClick}>Cancel</button>
-          </span>
-        </section>
+        <p>Submit selected events for {this.props.courseCode}</p>
+        <img
+          src={require("/img/CancelX.png")}
+          alt="Cancel"
+          className="cancelX"
+          onClick={this.props.handleCancelSubmitClick}
+        />
       </section>
     );
   }
