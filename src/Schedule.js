@@ -10,16 +10,34 @@ class Schedule extends React.Component {
     schedulePending: false
   };
 
+  selectAllClickHandler = event => {
+    this.props.selectAllEvents(this.state.schedule);
+  };
+
+  groupSelectAllClickHandler = event => {
+    event.stopPropagation();
+    for (const groupSchedule of this.state.schedule) {
+      if (
+        event.currentTarget.parentNode.childNodes[0].innerHTML ===
+        groupSchedule.activityTitle
+      ) {
+        this.props.selectAllGroupEvents(groupSchedule);
+        return;
+      }
+    }
+  };
+
   componentWillMount(props) {
     this.getSchedule();
   }
 
   groupClickHandler = async event => {
-    const groupTitle = event.currentTarget.childNodes[0].innerHTML;
-    this.setState({ groupTitle: groupTitle });
+    const groupTitle =
+      event.currentTarget.childNodes[0].childNodes[0].innerHTML;
+    await this.setState({ groupTitle: groupTitle });
   };
 
-  clearGroupSchedule = () => {
+  clearGroupSchedule = event => {
     this.setState({ groupTitle: "" });
   };
 
@@ -97,8 +115,16 @@ class Schedule extends React.Component {
 
     return (
       <section className="Schedule">
-        <ScheduleHeader courseCode={this.props.courseCode} />
+        <ScheduleHeader
+          selectAllClickHandler={this.selectAllClickHandler}
+          handleBackClick={this.props.handleBackClick}
+          handleSelectAll={this.props.scheduleSelectAll}
+          courseCode={this.props.courseCode}
+          schedule={this.state.schedule}
+          selectedEvents={this.props.selectedEvents}
+        />
         <ScheduleGroupList
+          selectAllGroupEventsClickHandler={this.groupSelectAllClickHandler}
           pending={this.state.schedulePending}
           activeGroupClickHandler={this.clearGroupSchedule}
           schedule={this.state.schedule}

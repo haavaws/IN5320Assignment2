@@ -1,12 +1,30 @@
 import React from "react";
 
 class CourseListHeader extends React.Component {
+  state = { years: [] };
+  componentDidMount() {
+    var years = [];
+    for (var i = 0; i < 10; i++) {
+      years.push(parseInt(this.props.baseYear, 10) + 1 - i);
+    }
+    this.setState({ years });
+  }
   render() {
     return (
       <section className="CourseListHeader">
         <h3>Courses</h3>
-        <select onChange={this.props.yearChangeHandler} id="yearDDL">
-          <option value={this.props.year}>{this.props.year}</option>
+        <select
+          value={this.props.year}
+          onChange={this.props.yearChangeHandler}
+          id="yearDDL"
+        >
+          {this.state.years.map(year => {
+            return (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            );
+          })}
         </select>
         <select
           value={this.props.semester}

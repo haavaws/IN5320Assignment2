@@ -6,10 +6,14 @@ class ScheduleGroup extends React.Component {
     var i;
     var selectedGroupEvents = [];
     for (i = 0; i < this.props.selectedEvents.length; i++) {
-      if (this.props.selectedEvents[i].groupTitle === this.props.groupTitle) {
+      if (
+        this.props.selectedEvents[i].activityTitle === this.props.groupTitle
+      ) {
         selectedGroupEvents = this.props.selectedEvents[i].events;
       }
     }
+    const numEvents = this.props.groupSchedule.length;
+    const numSelectedEvents = selectedGroupEvents.length;
     return (
       <li
         className={
@@ -25,8 +29,19 @@ class ScheduleGroup extends React.Component {
           this.props.groupClickHandler
         }
       >
-        <p className="data">{this.props.groupTitle}</p>
-        <p className="ScheduleGroupTitle">{this.props.groupTitle}</p>
+        <span className="scheduleGroupHeader">
+          <p className="scheduleGroupTitle">{this.props.groupTitle}</p>
+          <img
+            className="checkmark"
+            onClick={this.props.selectAllGroupEventsClickHandler}
+            alt="select all"
+            src={
+              (numEvents === numSelectedEvents &&
+                require("./img/CheckedCheckmarkSmall.png")) ||
+              require("/img/UncheckedCheckmarkSmall.png")
+            }
+          />
+        </span>
         {this.props.selectedGroupTitle === this.props.groupTitle && (
           <ScheduleEventList
             groupSchedule={this.props.groupSchedule}

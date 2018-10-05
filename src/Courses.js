@@ -6,7 +6,8 @@ class Courses extends React.Component {
   state = {
     courses: [],
     pending: false,
-    searchValue: ""
+    searchValue: "",
+    courseFetchFailed: false
   };
 
   async componentDidMount() {
@@ -64,6 +65,7 @@ class Courses extends React.Component {
     } catch (e) {
       console.log("Failed to fetch courses!");
       console.log(e.message);
+      this.setState({ courseFetchFailed: true });
     }
   }
 
@@ -76,6 +78,7 @@ class Courses extends React.Component {
     return (
       <section className="Courses">
         <CourseListHeader
+          baseYear={this.props.baseYear}
           onKeyPressInputField={this.props.onKeyPressInputField}
           year={this.props.year}
           semester={this.props.semester}
@@ -85,6 +88,7 @@ class Courses extends React.Component {
           searchValue={this.state.searchValue}
         />
         <CourseList
+          courseFetchFailed={this.state.courseFetchFailed}
           pending={this.state.pending}
           activeCourse={this.props.activeCourse}
           activeCourseClickHandler={this.props.activeCourseClickHandler}

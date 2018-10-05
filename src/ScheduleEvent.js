@@ -42,25 +42,26 @@ function ScheduleEvent(props) {
       }
       onClick={props.eventClickHandler}
     >
-      <p className="data">{props.event.title}</p>
-      <p className="data">{props.event.dtStart}</p>
-      <p className="data">{props.event.dtEnd}</p>
-      <p className="data">{props.event.rooms[0].buildingName}</p>
-      <p className="data">{props.event.rooms[0].roomName}</p>
+      <p className="data">{JSON.stringify(props.event)}</p>
       <p className="EventTitle">{props.event.title}</p>
-      <span className="eventDateTime">
-        <span>
-          <p>{getDate(new Date(props.event.dtStart))}</p>
+      {props.event.dtStart &&
+        props.event.dtEnd && (
+          <span className="eventDateTime">
+            <span>
+              <p>{getDate(new Date(props.event.dtStart))}</p>
+              <span className="eventTime">
+                <p>{getTime(new Date(props.event.dtStart))}</p>-
+                <p>{getTime(new Date(props.event.dtEnd))}</p>
+              </span>
+            </span>
+          </span>
+        )}
+      {props.event.rooms && (
+        <span className="eventLocation">
+          <p>{props.event.rooms[0].buildingName}</p>
+          <p>{props.event.rooms[0].roomName}</p>
         </span>
-        <span className="eventTime">
-          <p>{getTime(new Date(props.event.dtStart))}</p>-
-          <p>{getTime(new Date(props.event.dtEnd))}</p>
-        </span>
-      </span>
-      <span className="eventLocation">
-        <p>{props.event.rooms[0].buildingName}</p>
-        <p>{props.event.rooms[0].roomName}</p>
-      </span>
+      )}
     </li>
   );
 }

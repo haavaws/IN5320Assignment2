@@ -9,6 +9,9 @@ function ScheduleGroupList(props) {
       {props.schedule.map((category, index) => {
         return (
           <ScheduleGroup
+            selectAllGroupEventsClickHandler={
+              props.selectAllGroupEventsClickHandler
+            }
             activeGroupClickHandler={props.activeGroupClickHandler}
             groupClickHandler={props.groupClickHandler}
             eventClickHandler={props.eventClickHandler}
