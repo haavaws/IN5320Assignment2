@@ -1,6 +1,9 @@
 import React from "react";
 import ScheduleEvent from "./ScheduleEvent";
 
+/**
+ * Component for showing all events in a single group schedule
+ */
 function ScheduleEventList(props) {
   return (
     <section className="ScheduleEventList">

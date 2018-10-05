@@ -2,6 +2,9 @@ import React from "react";
 import CourseList from "./CourseList";
 import CourseListHeader from "./CourseListHeader";
 
+/**
+ * Section for the courses, searching and listing
+ */
 class Courses extends React.Component {
   state = {
     courses: [],
@@ -10,6 +13,9 @@ class Courses extends React.Component {
     courseFetchFailed: false
   };
 
+  /**
+   * Fetch courses from the UiO data API on when the component first mounts
+   */
   async componentDidMount() {
     var i;
     var storedCourses = [];
@@ -17,6 +23,8 @@ class Courses extends React.Component {
 
     await this.setState({ pending: true });
     try {
+      /* Retrieve courses from the local storage if there are any unexpired entries
+      for the selected year and semester */
       if (localStorage.storedCourses) {
         storedCourses = JSON.parse(localStorage.storedCourses);
         for (i = 0; i < storedCourses.length; i++) {
@@ -39,6 +47,8 @@ class Courses extends React.Component {
         }
         localStorage.storedCourses = JSON.stringify(storedCourses);
       }
+      /* If there were no unexpired entries in the local storage,
+      fetch from the UiO data API */
       if (this.state.pending) {
         var year = this.props.year;
         while (year >= 100) {
@@ -63,17 +73,22 @@ class Courses extends React.Component {
         this.setState({ courses: courses, pending: false });
       }
     } catch (e) {
-      console.log("Failed to fetch courses!");
-      console.log(e.message);
+      /* Signify to display error message if course fetching failed */
       this.setState({ courseFetchFailed: true });
     }
   }
 
+  /**
+   * Handle input to the search field
+   */
   inputChangeHandler = event => {
     const newVal = event.target.value;
     this.setState({ searchValue: newVal });
   };
 
+  /**
+   * Render the course section
+   */
   render() {
     return (
       <section className="Courses">

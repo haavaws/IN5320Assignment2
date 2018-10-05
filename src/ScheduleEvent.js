@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * Style the date to: WW dd. MMM
+ * where WW is first two weekday letters
+ * dd is date in numbers
+ * MMM is three first month letters
+ */
 function getDate(dateObj) {
   var days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
   var months = [
@@ -25,6 +31,10 @@ function getDate(dateObj) {
   return date;
 }
 
+/**
+ * Style the hours and minutes of a date as: HH:MM
+ * Where HH is hours and MM is minutes
+ */
 function getTime(dateObj) {
   var min = dateObj.getMinutes();
   var hr = dateObj.getHours();
@@ -34,7 +44,11 @@ function getTime(dateObj) {
   return time;
 }
 
+/**
+ * Component for showing a single event in the schedule
+ */
 function ScheduleEvent(props) {
+  /* Change styling if the event has been selected */
   return (
     <li
       className={
@@ -42,6 +56,7 @@ function ScheduleEvent(props) {
       }
       onClick={props.eventClickHandler}
     >
+      {/* Store the data for the event */}
       <p className="data">{JSON.stringify(props.event)}</p>
       <p className="EventTitle">{props.event.title}</p>
       {props.event.dtStart &&

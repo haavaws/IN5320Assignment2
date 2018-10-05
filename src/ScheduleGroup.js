@@ -1,10 +1,16 @@
 import React from "react";
 import ScheduleEventList from "./ScheduleEventList";
 
+/**
+ * Component for showing a single schedule group
+ * Contains a list component with all associated events
+ */
 class ScheduleGroup extends React.Component {
   render() {
     var i;
     var selectedGroupEvents = [];
+
+    /* Check how many of its associated events have been selected */
     for (i = 0; i < this.props.selectedEvents.length; i++) {
       if (
         this.props.selectedEvents[i].activityTitle === this.props.groupTitle
@@ -12,8 +18,11 @@ class ScheduleGroup extends React.Component {
         selectedGroupEvents = this.props.selectedEvents[i].events;
       }
     }
+
     const numEvents = this.props.groupSchedule.length;
     const numSelectedEvents = selectedGroupEvents.length;
+
+    /* Change styling depending on how many of its associated events have been selected */
     return (
       <li
         className={
@@ -31,13 +40,14 @@ class ScheduleGroup extends React.Component {
       >
         <span className="scheduleGroupHeader">
           <p className="scheduleGroupTitle">{this.props.groupTitle}</p>
+          {/* Button for selecting all associated events */}
           <img
             className="checkmark"
             onClick={this.props.selectAllGroupEventsClickHandler}
             alt="select all"
             src={
               (numEvents === numSelectedEvents &&
-                require("./img/CheckedCheckmarkSmall.png")) ||
+                require("/img/CheckedCheckmarkSmall.png")) ||
               require("/img/UncheckedCheckmarkSmall.png")
             }
           />

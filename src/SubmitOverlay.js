@@ -1,15 +1,23 @@
 import React from "react";
 import SubmitOverlayContent from "./SubmitOverlayContent";
 
+/**
+ * Component for showing the dialog for submitting the selected events to the Google Calendar
+ */
 class SubmitOverlay extends React.Component {
-  state = { calendars: [], calendarsPending: true };
+  state = {
+    calendars: [] /* All calendars in the users Google Calendar */,
+    calendarsPending: true /* Have the calendars been fetched yet */
+  };
 
+  /* Fetch calendars from the users Google Calendar on mount */
   async componentDidMount() {
+    /* Request the calendars from the Google API */
     var request = window.gapi.client.calendar.calendarList.list();
     var calendars = [];
-
     var requestPromises = [];
 
+    /* Request specifics from all retrieved calendars */
     await request.then(response => {
       var i;
       for (i = 0; i < response.result.items.length; i++) {
@@ -20,6 +28,7 @@ class SubmitOverlay extends React.Component {
       }
     });
 
+    /* Wait for all calendar requests to resolve and store the results */
     Promise.all(requestPromises).then(async responses => {
       for (const response of responses) {
         const calendar = {
@@ -34,7 +43,12 @@ class SubmitOverlay extends React.Component {
     });
   }
 
+  /**
+   * Render the dialog
+   */
   render() {
+    /* Only render if the user has clicked the "Add to calendar" button, the
+    app is submitting events to the Google Calendar, or the events have just been submitted */
     if (
       this.props.reviewingEvents ||
       this.props.submitting ||
@@ -42,7 +56,10 @@ class SubmitOverlay extends React.Component {
     ) {
       return (
         <section
-          onClick={!this.props.submitting && this.props.handleCancelSubmitClick}
+          onClick={
+            (!this.props.submitting && this.props.handleCancelSubmitClick) ||
+            (() => {})
+          }
           className="SubmitOverlay"
         >
           <SubmitOverlayContent

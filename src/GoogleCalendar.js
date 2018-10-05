@@ -1,8 +1,12 @@
 import React from "react";
 import GapiLoading from "./GapiLoading.js";
 
+/**
+ * Component for interacting with the Google API
+ */
 class GoogleCalendar extends React.Component {
   render() {
+    /* Show loading screen if the Google API has not yet finished loading */
     if (!this.props.gapiLoaded) {
       return (
         <section className="GoogleCalendar">
@@ -10,6 +14,7 @@ class GoogleCalendar extends React.Component {
         </section>
       );
     }
+    /* Show error message if the Google API failed to load */
     if (this.props.gapiLoadFailed) {
       return (
         <section className="GoogleCalendar gapiFailed">
@@ -34,6 +39,8 @@ class GoogleCalendar extends React.Component {
         </section>
       );
     }
+    /* Buttons for interacting with the Google API
+    Only show the "Add to calendar" button if the user is signed in */
     return (
       <section className="GoogleCalendar">
         <button

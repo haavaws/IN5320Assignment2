@@ -3,12 +3,17 @@ import SubmitOverlayContentFooter from "./SubmitOverlayContentFooter";
 import SubmitOverlayContentBody from "./SubmitOverlayContentBody";
 import SubmitOverlayContentHeader from "./SubmitOverlayContentHeader";
 
+/**
+ * Component for showing the content of the submission dialog
+ * Contains a header, body and footer
+ */
 class SubmitOverlayContent extends React.Component {
   dontCancelOnClick = event => {
     event.stopPropagation();
   };
 
   render() {
+    /* If no events have been selected by the user, notify */
     if (this.props.calendarEvents.length === 0)
       return (
         <section
@@ -19,6 +24,8 @@ class SubmitOverlayContent extends React.Component {
           <button onClick={this.props.handleCancelSubmitClick}>Cancel</button>
         </section>
       );
+    /* Show different dialogs depending on if the user hasn't submitted yet,
+    the app is submitting, or submission has just completed */
     if (this.props.submitting) {
       return (
         <section

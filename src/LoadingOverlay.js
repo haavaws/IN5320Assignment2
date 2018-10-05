@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Component for showing a loading overlay where content is waiting to be loaded
+ */
 class LoadingOverlay extends React.Component {
   render() {
     return (

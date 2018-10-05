@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Component for showing the header of the schedule section
+ */
 function ScheduleHeader(props) {
   var numEvents = 0;
   var numSelectedEvents = 0;
@@ -11,6 +14,7 @@ function ScheduleHeader(props) {
   }
   return (
     <section className="ScheduleHeader">
+      {/* Button for closing the course schedule */}
       <img
         className="backButton"
         onClick={props.handleBackClick}
@@ -18,6 +22,8 @@ function ScheduleHeader(props) {
         src={require("/img/BackIcon.png")}
       />
       <h3>Schedule for {props.courseCode}</h3>
+      {/* Button for selecting all events in the schedule, or deselecting
+      if all are already selected */}
       <img
         className="checkmark"
         onClick={props.selectAllClickHandler}

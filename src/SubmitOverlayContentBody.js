@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Component for showing the body of the submission dialog
+ */
 class SubmitOverlayContentBody extends React.Component {
   render() {
     var i;
@@ -23,6 +26,7 @@ class SubmitOverlayContentBody extends React.Component {
               src={require("/img/PacmanLoading.svg")}
             />
           )) ||
+            /* Allow the user to select which calendar to submit the events to */
             (this.props.calendars.length > 0 && (
               <select
                 onChange={this.props.calendarChangeHandler}

@@ -2,8 +2,13 @@ import React from "react";
 import LoadingOverlay from "./LoadingOverlay";
 import Course from "./Course";
 
+/**
+ * Component for listing all courses provided in the courses field in props
+ * Will provide an error message if the fetch for courses failed previously
+ */
 class CourseList extends React.Component {
   render() {
+    /* Error message in case course fetch failed */
     if (this.props.courseFetchFailed) {
       return (
         <section className="CourseList">
@@ -23,10 +28,13 @@ class CourseList extends React.Component {
         </section>
       );
     }
+    /* Render the courses */
     return (
       <section className="CourseList">
+        {/* Provide a loading overlay while waiting for courses to be fetched */}
         {this.props.pending && <LoadingOverlay />}
         {this.props.courses.map((course, index) => {
+          /* Map the courses */
           if (
             course.code
               .toUpperCase()
@@ -43,6 +51,7 @@ class CourseList extends React.Component {
               />
             );
           else {
+            /* Don't render the course if it doesn't match the filter string */
             return null;
           }
         })}
