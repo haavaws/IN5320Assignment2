@@ -1,29 +1,30 @@
 html,
 body,
 #root {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  max-height: 100%;
   max-width: 100%;
-  width: 100%;
   padding: 0;
   margin: 0;
-  height: 100%;
 }
 
 .App {
-  width: 100%;
   display: flex;
-  height: 100%;
+  flex: 1;
   font-family: sans-serif;
   flex-direction: column;
+  max-width: 100%;
   padding: 0;
   margin: 0;
 }
 
 /* Copied from Modal */
 .LoadingOverlay,
-.SubmitOverlay,
-.GapiLoadingOverlay {
+.SubmitOverlay {
   display: flex; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  flex: 1 1 100%;
   z-index: 1; /* Sit on top */
   width: 100%; /* Full width */
   height: 100%; /* Full height */
@@ -33,97 +34,191 @@ body,
   background-color: rgba(0, 0, 0, 0.2); /* Black w/ opacity */
 }
 
-.SubmitOverlayContent,
-.gapiLoadingOverlayContent {
+.LoadingOverlay {
+  position: relative; /* Stay in place */
+}
+
+.SubmitOverlay {
+  position: fixed; /* Stay in place */
+}
+
+.SubmitOverlayContent {
+  max-width: 80%;
   display: flex;
   flex: 0 1 auto;
-  width: 50%;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   border-radius: 10px;
   background-color: white;
-  overflow: hidden;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.541);
+}
+
+.SubmitOverlayContent img {
+  object-fit: contain;
+  margin: 10px;
 }
 
 .overlayContentAlt {
   align-items: center;
-  background-color: red;
+}
+
+.overlayContentAlt p {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.overlayContentAlt button {
+  border-style: none;
+  border-radius: 3px;
   color: white;
+  font-weight: bold;
+  background-color: rgb(0, 81, 255);
+  padding: 5px;
+  margin: 10px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.541);
+  transition: background-color 0.3s;
+}
+
+.canHover .overlayContentAlt button:hover {
+  cursor: pointer;
+  background-color: rgb(53, 116, 250);
 }
 
 .SubmitOverlayContentHeader {
+  position: relative;
+  flex-basis: auto;
   display: flex;
+  align-items: center;
+  flex-shrink: 1;
   width: 100%;
-  background-color: blue;
+  max-width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  flex-grow: 0;
+  background-color: rgb(0, 110, 255);
+  box-shadow: 0 2px 2px -2px black;
   color: white;
 }
 
-.SubmitOverlayContentHeader span {
-  align-items: center;
-  width: 100%;
+.SubmitOverlayContentHeader p {
+  font-weight: bold;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  flex-direction: row;
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: auto;
+  margin: 10px;
 }
 
-.SubmitOverlayContentHeader button {
-  display: flex;
-  border-style: none;
+.SubmitOverlayContentHeader p::selection {
+  color: black;
   background-color: white;
-  height: fit-content;
 }
 
-@media (hover: hover) {
-  .SubmitOverlayContentHeader button:hover {
-    cursor: pointer;
-    background-color: grey;
-  }
+.cancelX {
+  padding: 10px;
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  object-fit: contain;
+}
+
+.cancelX:hover {
+  cursor: pointer;
+  background-color: red;
 }
 
 .SubmitOverlayContentBody {
+  flex-grow: 1;
+  flex-basis: auto;
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-direction: column;
+  text-align: center;
   width: 100%;
   background-color: white;
   color: black;
 }
 
+.SubmitOverlayContentBody p {
+  margin: 10px;
+}
+
+.SubmitOverlayContentBody img {
+  max-width: 100%;
+  object-fit: contain;
+  transform: rotate(-90deg);
+}
+
 .SubmitOverlayContentFooter {
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  background-color: blue;
+  background-color: rgb(0, 110, 255);
   color: white;
-  height: 30px;
+  height: fit-content;
+}
+
+.SubmitOverlayContentFooter button {
+  border-style: none;
+  color: white;
+  background-color: rgb(94, 147, 245);
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  margin: 10px;
+  transition: background-color 0.3s;
+  box-shadow: inset 0 0 5px rgba(190, 213, 255, 0.253);
+}
+
+.SubmitOverlayContentFooter button:hover {
+  background-color: rgb(118, 164, 248);
+  cursor: pointer;
 }
 
 .GoogleCalendar {
   display: flex;
-  flex-basis: auto;
-  flex-grow: 1;
+  flex: 0 0 auto;
   flex-direction: row;
-  width: 100%;
+  flex-wrap: wrap;
+}
+
+.gapiFailed {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: black;
+  border-bottom: 1px solid black;
+}
+
+.gapiFailed p {
+  display: inline-block;
+  margin: 0px 10px 10px 10px;
 }
 
 .GoogleCalendar button {
+  display: flex;
+  flex: 1 1 130px;
+  padding: 10px;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
   font-weight: bold;
   color: white;
   background-color: rgb(0, 81, 255);
-  border: none;
-  flex-basis: auto;
-  flex-grow: 1;
-  flex-shrink: 0;
-  padding: 10px;
+  border: 1px solid white;
+  transition: background-color 0.3s;
 }
 
-@media (hover: hover) {
-  .GoogleCalendar button:hover {
-    cursor: pointer;
-    background-color: rgb(53, 116, 250);
-  }
+.canHover .GoogleCalendar button:hover {
+  cursor: pointer;
+  background-color: rgb(53, 116, 250);
 }
 
 .buttonBorder {
@@ -132,46 +227,73 @@ body,
   border-left: 1px solid white;
 }
 
-.content {
-  width: 100%;
-  box-sizing: border-box;
-  flex-shrink: 1;
-  flex-basis: 100%;
-  max-width: 100%;
+.GapiLoading {
+  position: relative;
+  z-index: 1;
   display: flex;
-  height: 100%;
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 3px;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  flex-direction: row;
+  box-shadow: 0 2px 2px -2px black;
+}
+
+.GapiLoading span {
+  display: flex;
+  text-overflow: hidden;
+  overflow: hidden;
+  font-weight: bold;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.GapiLoading p {
+  margin: 10px;
+}
+
+.GapiLoading img {
+  display: flex;
+  max-width: 33%;
+  transform: scale(-1);
+}
+
+.content {
+  display: flex;
+  flex: 1 1 100%;
   font-family: sans-serif;
   text-align: center;
   align-items: flex-start;
   flex-direction: row;
   padding: 0;
   margin: 0;
+  overflow: auto;
 }
 
 .Courses {
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 50%;
   display: flex;
+  flex: 1 1 100%;
+  height: 100%;
+  min-width: 0;
   justify-content: center;
   flex-direction: column;
-  flex-basis: auto;
-  flex-grow: 1;
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
 .CourseListHeader {
-  flex-basis: auto;
-  flex-shrink: 0;
-  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
   flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   text-align: center;
-  align-items: center;
   background-color: rgb(224, 227, 228);
+  box-shadow: 0 5px 5px -5px black;
   margin: 0;
   width: 100%;
 }
@@ -190,7 +312,6 @@ body,
   box-sizing: border-box;
   border-style: none;
   margin-right: 2px;
-  padding: 0;
   height: 32px;
 }
 
@@ -199,26 +320,24 @@ body,
   min-width: 0;
   box-sizing: border-box;
   border-style: none;
-  padding: 0;
   margin-right: 2px;
   height: 32px;
 }
 
 .searchField {
-  flex: 1 1 auto;
+  flex: 1 1 50px;
   min-width: 0;
   border-style: none;
   box-sizing: border-box;
   padding: 5px;
   margin: 0;
-  line-height: 22px;
+  max-width: 100%;
+  border-color: rgb(52, 160, 248);
+  transition: box-shadow 0.3s;
 }
 
-@media (hover: hover) {
-  .searchField:hover {
-    border-color: rgb(52, 160, 248);
-    box-shadow: 0px 0px 3px rgb(52, 160, 248);
-  }
+.canHover .searchField:hover {
+  box-shadow: 0px 0px 3px rgb(52, 160, 248);
 }
 
 .searchField:focus {
@@ -227,19 +346,17 @@ body,
   box-shadow: inset 0px 0px 3px rgb(52, 160, 248);
 }
 
-.searchField:hover:focus {
+.canHover .searchField:hover:focus {
   border-style: none;
   box-shadow: 0px 0px 3px rgb(52, 160, 248), inset 0px 0px 3px rgb(52, 160, 248);
 }
 
 .CourseList {
   display: flex;
-  flex-basis: auto;
-  flex-shrink: 1;
+  flex: 1;
   flex-direction: column;
-  width: 100%;
   margin: 0;
-  padding: 0;
+  padding-top: 3px;
   overflow: auto;
 }
 
@@ -255,13 +372,13 @@ body,
   margin: 2px 4px 2px 4px;
   text-align: center;
   border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.144);
+  transition: background-color 0.3s;
 }
-@media (hover: hover) {
-  .Course:hover {
-    color: white;
-    background-color: rgb(94, 153, 243);
-    cursor: pointer;
-  }
+.canHover .Course:hover {
+  color: white;
+  background-color: rgb(94, 153, 243);
+  cursor: pointer;
 }
 
 .courseCode {
@@ -282,11 +399,10 @@ body,
 .activeCourse {
   color: white;
   background-color: rgb(22, 104, 228);
+  transition: background-color 0.3s;
 }
-@media (hover: hover) {
-  .activeCourse:hover {
-    background-color: rgb(29, 118, 252);
-  }
+.canHover .activeCourse:hover {
+  background-color: rgb(29, 118, 252);
 }
 
 .border {
@@ -298,40 +414,101 @@ body,
 }
 
 .Schedule {
-  min-width: 50%;
-  max-width: 100%;
-  max-height: 100%;
   display: flex;
+  flex: 1 1 100%;
+  height: 100%;
+  max-height: 100%;
+  min-width: 0;
   justify-content: center;
   flex-direction: column;
-  flex-basis: auto;
-  flex-grow: 1;
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
+@media (max-width: 600px) {
+  .Schedule {
+    flex-shrink: 0;
+    width: 100%;
+  }
+}
+
 .ScheduleHeader {
-  flex-basis: auto;
-  flex-shrink: 0;
-  box-sizing: border-box;
-  flex-wrap: wrap;
+  position: relative;
   display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
   justify-content: space-between;
   text-align: center;
   align-items: center;
   background-color: rgb(224, 227, 228);
+  box-shadow: 0 5px 5px -5px black;
   margin: 0;
-  width: 100%;
 }
 
 .ScheduleHeader h3 {
+  display: block;
   padding: 5px;
-  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin: 0;
+}
+
+.backButton {
+  position: relative;
+  display: block;
+  object-fit: contain;
+  top: 0;
+  left: 0;
+  margin-left: 10px;
+  z-index: 1;
+}
+
+@media (max-width: 300px) {
+  .ScheduleHeader {
+    justify-content: center;
+  }
+  .backButton {
+    left: initial;
+    margin-right: 10px;
+    order: 1;
+  }
+  .ScheduleHeader .checkmark {
+    right: initial;
+    margin-left: 10px;
+    order: 2;
+  }
+}
+
+.canHover .backButton:hover {
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(170, 186, 253);
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  top: 1px;
+  right: 0;
+  padding: 5px;
+  margin-right: 20px;
+  z-index: 1;
+}
+
+.ScheduleHeader .checkmark {
+  position: relative;
+  top: 0;
+}
+
+.canHover .checkmark:hover {
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(221, 252, 217);
+  cursor: pointer;
 }
 
 .scheduleCourseName {
@@ -342,14 +519,16 @@ body,
   display: flex;
   flex-basis: auto;
   flex-shrink: 1;
+  flex-grow: 1;
   flex-direction: column;
   width: 100%;
-  margin: 0;
+  margin-top: 3px;
   padding: 0;
   overflow: auto;
 }
 
 .ScheduleGroup {
+  position: relative;
   flex-wrap: wrap;
   display: flex;
   flex: 0 0 auto;
@@ -361,40 +540,35 @@ body,
   margin: 2px 4px 2px 4px;
   text-align: center;
   border-radius: 5px;
+  transition: background-color 0.3s;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.144);
 }
-@media (hover: hover) {
-  .ScheduleGroup:hover {
-    color: white;
-    background-color: rgb(94, 153, 243);
-    cursor: pointer;
-  }
+.canHover .ScheduleGroup:hover {
+  color: white;
+  background-color: rgb(94, 153, 243);
+  cursor: pointer;
 }
 
 .someEventsSelected {
   color: white;
   background-color: rgb(118, 166, 230);
+  transition: background-color 0.3s;
 }
-@media (hover: hover) {
-  .someEventsSelected:hover {
-    background-color: rgb(153, 192, 250);
-  }
+.canHover .someEventsSelected:hover {
+  background-color: rgb(153, 192, 250);
 }
 
 .allEventsSelected {
   color: white;
   background-color: rgb(63, 136, 231);
+  transition: background-color 0.3s;
 }
-@media (hover: hover) {
-  .allEventsSelected:hover {
-    background-color: rgb(87, 154, 255);
-  }
+.canHover .allEventsSelected:hover {
+  background-color: rgb(87, 154, 255);
 }
 
-.ScheduleGroupTitle {
+.scheduleGroupTitle {
   font-weight: bold;
-}
-
-.ScheduleGroup p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -402,10 +576,20 @@ body,
   padding: 0;
 }
 
-.Loader {
-  font-size: 3rem;
-  text-align: center;
-  margin: 40px 0;
+@media (max-width: 300px) {
+  .scheduleGroupHeader .checkmark {
+    position: relative;
+    display: block;
+    margin: 0;
+    right: initial;
+    top: initial;
+    object-fit: none;
+  }
+  .scheduleGroupHeader {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
 }
 
 .ScheduleEventList {
@@ -434,23 +618,22 @@ body,
   margin: 2px 4px 2px 4px;
   text-align: center;
   border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.144);
+  transition: background-color 0.3s;
 }
-@media (hover: hover) {
-  .ScheduleEvent:hover {
-    color: white;
-    background-color: rgb(59, 134, 247);
-    cursor: pointer;
-  }
+.canHover .ScheduleEvent:hover {
+  color: white;
+  background-color: rgb(59, 134, 247);
+  cursor: pointer;
 }
 
 .selectedEvent {
   color: white;
   background-color: rgb(22, 104, 228);
+  transition: background-color 0.3s;
 }
-@media (hover: hover) {
-  .selectedEvent:hover {
-    background-color: rgb(29, 118, 252);
-  }
+.canHover .selectedEvent:hover {
+  background-color: rgb(29, 118, 252);
 }
 
 .ScheduleEvent p {
