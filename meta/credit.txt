@@ -1,0 +1,13 @@
+https://loading.io/icon/vroc7x
+loading.io pacman eclipse
+
+green check mark: https://www.iconsdb.com/green-icons/check-mark-3-icon.html
+back arrow: https://icons8.com/icon/60636/back
+cancel cross: https://www.iconfinder.com/icons/103181/close_cross_delete_remove_icon
+
+google api:
+https://developers.google.com/calendar/quickstart/js
+https://developers.google.com/identity/protocols/OAuth2UserAgent
+
+calendar event:
+https://developers.google.com/calendar/v3/reference/events/insert#examples

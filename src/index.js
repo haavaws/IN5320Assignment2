@@ -26,7 +26,6 @@ class App extends React.Component {
     /* The scope of the application in regards to what
     permissions the application needs from Google */
     scope: "https://www.googleapis.com/auth/calendar",
-
     baseYear: 0 /* The current year */,
     year: "0" /* The year of the courses to query the UiO API for */,
     semester: "" /* The semester of the courses to query the UiO API for */,
@@ -112,6 +111,7 @@ class App extends React.Component {
    * Handles the change in the DDL of the years for which to retrieve courses
    */
   yearChangeHandler = event => {
+    console.log(event.target.value);
     this.setState({ year: event.target.value });
   };
 
@@ -290,6 +290,56 @@ makes all events in that group schedule selected */
       } else newSelectedEvents.push(groupSchedule);
       await this.setState({ selectedEvents: newSelectedEvents });
     }
+  };
+
+  selectAllEvents = schedule => {
+    var numEvents = 0;
+    var numSelectedEvents = 0;
+    for (const groupSchedule of schedule) {
+      numEvents += groupSchedule.events.length;
+    }
+    for (const groupSelectedSchedule of this.state.selectedEvents) {
+      numSelectedEvents += groupSelectedSchedule.events.length;
+    }
+    console.log(numEvents);
+    console.log(numSelectedEvents);
+    if (numEvents === numSelectedEvents) this.setState({ selectedEvents: [] });
+    else this.setState({ selectedEvents: schedule });
+  };
+
+  selectAllGroupEvents = async groupSchedule => {
+    const numGroupEvents = groupSchedule.events.length;
+    if (numGroupEvents === 0) return;
+    var numSelectedGroupEvents = 0;
+    var newSelectedEvents;
+    var i;
+    for (i = 0; i < this.state.selectedEvents.length; i++) {
+      if (
+        this.state.selectedEvents[i].activityTitle ===
+        groupSchedule.activityTitle
+      ) {
+        numSelectedGroupEvents = this.state.selectedEvents[i].events.length;
+        break;
+      }
+    }
+    console.log(numGroupEvents);
+    console.log(numSelectedGroupEvents);
+    console.log(i);
+    if (numGroupEvents === numSelectedGroupEvents) {
+      console.log("hei");
+      newSelectedEvents = Array.from(this.state.selectedEvents);
+      newSelectedEvents.splice(i, 1);
+      await this.setState({
+        selectedEvents: newSelectedEvents
+      });
+    } else {
+      newSelectedEvents = Array.from(this.state.selectedEvents);
+      if (numSelectedGroupEvents > 0) {
+        newSelectedEvents[i] = groupSchedule;
+      } else newSelectedEvents.push(groupSchedule);
+      await this.setState({ selectedEvents: newSelectedEvents });
+    }
+    console.log(this.state.selectedEvents);
   };
 
   /* Code interacting with google services based on:

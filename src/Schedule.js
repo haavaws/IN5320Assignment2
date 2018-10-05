@@ -19,7 +19,6 @@ class Schedule extends React.Component {
     /* Did the schedule fetch fail? */
     scheduleFetchFailed: false
   };
-
   /**
    * Handles the click of the check mark in the header setting all events to selected
    * Calls a function provided in props, to change the state of a parent component
